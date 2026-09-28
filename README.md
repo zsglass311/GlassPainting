@@ -131,11 +131,19 @@ GitHub only hosts free websites from **public** repositories. That's fine: every
 3. Stay on the **General** page and scroll all the way to the bottom, to the red **Danger Zone** box. (Don't worry: that's just GitHub's name for important settings.)
 4. Next to "Change repository visibility," click **Change visibility** → **Change to public**, then follow the prompts to confirm. GitHub may ask you to type the repository name or re-enter your password.
 
-### 5b. Turn on GitHub Pages
+### 5b. Make `main` your default branch
+
+Your repository has a branch called **`main`** that holds the finished website. Making it the "default" means your live site and all future changes start from it.
+
+1. Still in **Settings** → **General**, find the **Default branch** section near the top.
+2. Click the button with **two arrows** next to the current branch name.
+3. Choose **main** from the list and click **Update**, then confirm with **I understand, update the default branch**.
+
+### 5c. Turn on GitHub Pages
 
 1. Still in **Settings**, click **Pages** in the left-hand menu (under "Code and automation").
 2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**.
-3. Under **Branch**, click the dropdown and choose the branch that starts with **`claude/`**. Leave the folder set to **/ (root)**. Click **Save**.
+3. Under **Branch**, click the dropdown and choose **main**. Leave the folder set to **/ (root)**. Click **Save**.
 4. Wait 1–2 minutes, then refresh the page. At the top you'll see **"Your site is live at https://zsglass311.github.io/GlassPainting/"**. Click **Visit site**.
 
 Your website is now on the internet. You can share that link right away, but a short web address of your own (Steps 6–7) is much easier for customers to remember.
