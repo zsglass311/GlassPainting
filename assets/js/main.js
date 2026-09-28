@@ -2,12 +2,12 @@
 (() => {
   'use strict';
 
-  const header = document.querySelector('.site-header');
-  const toggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('.header');
+  const toggle = document.querySelector('.menu-btn');
   const nav = document.getElementById('site-nav');
 
   // ---- Mobile menu ----
-  if (toggle && nav) {
+  if (header && toggle && nav) {
     const setMenu = (open) => {
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
@@ -31,23 +31,16 @@
     document.addEventListener('click', (event) => {
       if (nav.classList.contains('is-open') && !header.contains(event.target)) setMenu(false);
     });
-    window.matchMedia('(min-width: 1140px)').addEventListener('change', (event) => {
+    window.matchMedia('(min-width: 1081px)').addEventListener('change', (event) => {
       if (event.matches) setMenu(false);
     });
   }
 
   // ---- Header shadow once the page scrolls ----
-  const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
-
-  // ---- Hide the phone-sized call/quote bar while the quote form is on screen ----
-  const mobileBar = document.querySelector('.mobile-cta');
-  const quoteSection = document.getElementById('quote');
-  if (mobileBar && quoteSection && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([entry]) => {
-      mobileBar.classList.toggle('is-hidden', entry.isIntersecting);
-    }, { threshold: 0.1 }).observe(quoteSection);
+  if (header) {
+    const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
   }
 
   // ---- Footer year ----
@@ -79,7 +72,7 @@
     if (data.botcheck) return;
 
     if (!data.access_key || data.access_key.startsWith('YOUR_')) {
-      console.warn('Quote form is not connected yet: add the Web3Forms access key in index.html (see README).');
+      console.warn('Quote form is not connected: add the Web3Forms access key in index.html (see README).');
       showError();
       return;
     }

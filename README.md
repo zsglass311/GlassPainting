@@ -263,7 +263,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 
 - **Services:** the interior and exterior lists (for example, "Drywall patching" or "Porches, columns & railings"). Remove anything you don't do.
 - **Service area:** the list of towns is Claude's best guess at your area. Tell Claude the towns you actually serve.
-- **Our story and promises:** the "Our story" section and phrases like "work areas cleaned up every day." Make sure they sound like you and match how you work.
+- **Your story and promises:** the "About Glass Painting" section and the six promises under "The Way We Work" (for example, "Work areas tidied at the end of every day"). Make sure they sound like you and match how you work.
 - **Worth adding if true:** a warranty on your work, real customer reviews, and real photos of your work. Photos make the biggest difference of all.
 
 ---
@@ -288,5 +288,5 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
   - Form key: the Web3Forms access key in the hidden `access_key` field of the quote form in `index.html` (tied to glasspaintingga@gmail.com)
 - Site URL: `https://glasspainting.homes/` (canonical link, `og:` meta tags, and JSON-LD). The other domains the owner bought forward to it through Porkbun URL forwarding.
 - The quote form posts JSON to Web3Forms (`https://api.web3forms.com/submit`) and shows an inline thank-you or error message. Without JavaScript it falls back to a normal form post. The hidden `botcheck` checkbox is a spam honeypot. Until a real key is added, the form shows a "please call or email us" message instead of sending.
-- Fonts: Fraunces (headings) and Figtree (body) from Google Fonts.
+- Fonts: Archivo (headings) and Source Sans 3 (body) from Google Fonts.
 - Preview locally: run `python3 -m http.server` in this folder and open http://localhost:8000
