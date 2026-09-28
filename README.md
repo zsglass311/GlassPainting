@@ -167,12 +167,12 @@ A domain is your web address. You rent it by the year from a "registrar." These 
 
 ## Step 7: Connect your domain to the website
 
-This tells the internet that your new domain should show your GitHub website. You'll add a few "DNS records," which work like a forwarding address.
+Your main web address is **glasspainting.homes**. This step tells the internet that it should show your GitHub website. You'll add a few "DNS records," which work like a forwarding address. Do this for **glasspainting.homes only**. Your other domains get forwarded to it in Step 7c.
 
 ### 7a. At Porkbun
 
 1. Log in to Porkbun and go to **Domain Management** (in the Account menu).
-2. Find your domain in the list and click **DNS** next to it. (You may need to hover over the domain or click **Details** to see it.)
+2. Find **glasspainting.homes** in the list and click **DNS** next to it. (You may need to hover over the domain or click **Details** to see it.)
 3. **Delete Porkbun's placeholder records.** At the bottom, under "Current Records," delete every record whose answer is **pixie.porkbun.com** (usually two of them) by clicking its **trash can** icon.
 4. **Add these 5 records**, one at a time. For each one, pick the **Type**, fill in **Host** and **Answer**, leave everything else as it is, and click **Add**:
 
@@ -189,14 +189,27 @@ This tells the internet that your new domain should show your GitHub website. Yo
 ### 7b. At GitHub
 
 1. Go to your repository → **Settings** → **Pages**.
-2. Under **Custom domain**, type `www.` followed by your domain (for example `www.glasspaintingga.com`) and click **Save**.
+2. Under **Custom domain**, type `glasspainting.homes` and click **Save**.
 3. GitHub checks your settings. This usually takes a few minutes to an hour, but can take up to 24 hours. When it's done you'll see **DNS check successful**.
 4. Check the box **Enforce HTTPS**. If it's grayed out, GitHub is still preparing your security certificate. Come back in an hour or so and check it then. This gives your site the padlock in the address bar.
-5. **Tell Claude your new domain** so it can update the site's Google info and link previews.
+5. **Tell Claude when it's done** so it can check that everything points to the right place.
 
-After this, both `yourdomain.com` and `www.yourdomain.com` open your website.
+After this, both `glasspainting.homes` and `www.glasspainting.homes` open your website.
 
 > GitHub adds a small file named **CNAME** to your repository when you save the custom domain. That's normal. Don't delete it.
+
+### 7c. Forward your other domains
+
+You also own glasspaintingga.com, glasspaintingga.net, glasspaintinghomes.com, glasspaintinghomes.net, glasspaintinggeorgia.com, glasspaintinggeorgia.net, and glasspaintingflorida.com. Forward each one to your main address so anyone who types them (especially the `.com` ones, which many people type out of habit) lands on your website. **Don't** add the GitHub records from 7a to these.
+
+For each of those domains:
+
+1. In Porkbun's **Domain Management**, find the domain and open **URL Forwarding**. (It's next to **DNS**, or under **Details**.)
+2. Leave **Hostname** blank. Set **Forward traffic to** `https://glasspainting.homes`.
+3. Choose **Permanent (301)** as the type. Turn on **Include path** and **Wildcard** if you see those options (Wildcard also forwards the `www.` version).
+4. Click **Submit** or **Add**. Porkbun sets up the DNS records for forwarding by itself. If it warns about existing records, let it replace them.
+
+After an hour or so, test by typing each domain into your browser. You should end up on glasspainting.homes.
 
 ---
 
@@ -273,7 +286,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
   - Phone: `(770) 555-0123` (shown) and `+17705550123` / `+1-770-555-0123` (links and structured data)
   - Email: `info@example.com`
   - Form key: `YOUR_WEB3FORMS_ACCESS_KEY` in `index.html`
-  - Site URL: `https://zsglass311.github.io/GlassPainting/` in the `og:` meta tags and JSON-LD, to update once a custom domain is live
+- Site URL: `https://glasspainting.homes/` (canonical link, `og:` meta tags, and JSON-LD). The other domains the owner bought forward to it through Porkbun URL forwarding.
 - The quote form posts JSON to Web3Forms (`https://api.web3forms.com/submit`) and shows an inline thank-you or error message. Without JavaScript it falls back to a normal form post. The hidden `botcheck` checkbox is a spam honeypot. Until a real key is added, the form shows a "please call or email us" message instead of sending.
 - Fonts: Fraunces (headings) and Figtree (body) from Google Fonts.
 - Preview locally: run `python3 -m http.server` in this folder and open http://localhost:8000
