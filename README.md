@@ -230,7 +230,7 @@ Just tell Claude what you'd like changed, in plain English. For example:
 - "Here are photos of our work. Add a gallery."
 - "Change the service area to these towns: …"
 - "Add this review from a customer: …"
-- "We're licensed and insured. Add that to the site."
+- "Add our business hours: Monday to Friday, 8 to 5."
 
 When Claude is done, it will either update the site directly or send you a link to a **pull request** (a proposed change waiting for your okay). To approve one, open the link, click the green **Merge pull request** button, then **Confirm merge**. Your live website updates within a couple of minutes.
 
@@ -243,7 +243,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 - **Services:** the interior and exterior lists (for example, "Drywall patching" or "Porches, columns & railings"). Remove anything you don't do.
 - **Service area:** the list of towns is Claude's best guess at your area. Tell Claude the towns you actually serve.
 - **Our story and promises:** the "Our story" section and phrases like "work areas cleaned up every day." Make sure they sound like you and match how you work.
-- **Worth adding if true:** licensed and insured, a warranty on your work, real customer reviews, and real photos of your work. Photos make the biggest difference of all.
+- **Worth adding if true:** a warranty on your work, real customer reviews, and real photos of your work. Photos make the biggest difference of all.
 
 ---
 
