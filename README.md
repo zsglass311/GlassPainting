@@ -37,6 +37,7 @@ Do these in order. Most people finish Steps 1–5 in about an hour. Steps 6–8 
 - [ ] **Step 7:** Connect your domain to the website (20 min, then some waiting)
 - [ ] **Step 8:** Get listed on Google Maps (20 min, then a few days for Google to verify you)
 - [ ] **Step 9:** Ask past customers for Google reviews
+- [ ] **Step 10:** Tell Google, Bing, and Apple about your site and business (30 min)
 
 > **Want to see the site online first?** You can do Step 5 at any time, even before Steps 1–4. The site will just show a placeholder phone number and email until Claude adds your real ones.
 
@@ -244,6 +245,20 @@ You have 40 years of happy customers, and that's your biggest advantage. The num
 
 ---
 
+## Step 10: Tell Google, Bing, and Apple about your site
+
+Search engines and AI assistants (Google's AI Overviews, ChatGPT, Copilot, Siri, and others) answer questions like "who paints houses in Braselton?" using search indexes and business listings. These free tools make sure they know your site and your business exists. Sign in with **glasspaintingga@gmail.com** for each.
+
+1. **Google Search Console** (https://search.google.com/search-console). Choose **Add property**, then **Domain**, and type `glasspainting.homes`. Google gives you a **TXT record** to add at Porkbun: open **DNS** for glasspainting.homes and add a record with Type **TXT**, Host blank, and Answer set to the code Google shows. Back in Search Console, click **Verify**. Then open **Sitemaps**, enter `sitemap.xml`, and click **Submit**.
+2. **Bing Webmaster Tools** (https://www.bing.com/webmasters). Choose **Import from Google Search Console**, which copies your site over automatically. Bing's index feeds Microsoft Copilot and is one of the sources ChatGPT search draws on.
+3. **Bing Places for Business** (https://www.bingplaces.com). Import your Google Business Profile once it's verified (Step 8). This puts you on Bing Maps.
+4. **Apple Business Connect** (https://businessconnect.apple.com). Add Glass Painting so you show up correctly in Apple Maps and Siri.
+5. **Keep your details identical everywhere.** Use the same name (**Glass Painting**), phone (**(770) 403-7608**), and website (**https://glasspainting.homes**) on every listing, including Nextdoor, Facebook, Yelp, and Angi. Matching details are how search engines and AI assistants confirm you're a real, established business.
+
+Once your Google Business Profile, Facebook page, or other listings are live, send Claude their links. Claude can add them to the site's search-engine information so everything is connected.
+
+---
+
 ## Changing the website later
 
 Just tell Claude what you'd like changed, in plain English. For example:
@@ -290,4 +305,6 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 - Site URL: `https://glasspainting.homes/` (canonical link, `og:` meta tags, and JSON-LD). The other domains the owner bought forward to it through Porkbun URL forwarding.
 - The quote form posts JSON to Web3Forms (`https://api.web3forms.com/submit`) and shows an inline thank-you or error message. Without JavaScript it falls back to a normal form post. The hidden `botcheck` checkbox is a spam honeypot. Until a real key is added, the form shows a "please call or email us" message instead of sending.
 - Fonts: Archivo (headings) and Source Sans 3 (body) from Google Fonts.
+- Search files: `robots.txt` (lets all crawlers in, including AI crawlers; hides `README.md`), `sitemap.xml` (update `<lastmod>` when the page changes meaningfully), `llms.txt` (a plain-language summary for AI assistants; keep it in sync with the page), and `404.html` (page-not-found).
+- Structured data: the JSON-LD block in `index.html` describes the business (HousePainter), the site, the page, and the FAQ. The FAQ answers there must match the visible FAQ text. Add Google Business Profile and social links as `sameAs` once they exist.
 - Preview locally: run `python3 -m http.server` in this folder and open http://localhost:8000
