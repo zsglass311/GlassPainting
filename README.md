@@ -285,7 +285,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 - **Contact details** (search the whole project when changing them):
   - Phone: `(770) 403-7608` (shown) and `+17704037608` / `+1-770-403-7608` (links and structured data)
   - Email: `glasspaintingga@gmail.com`
-  - Form key: still the placeholder `YOUR_WEB3FORMS_ACCESS_KEY` in `index.html` until the owner has a Web3Forms key
+  - Form key: the Web3Forms access key in the hidden `access_key` field of the quote form in `index.html` (tied to glasspaintingga@gmail.com)
 - Site URL: `https://glasspainting.homes/` (canonical link, `og:` meta tags, and JSON-LD). The other domains the owner bought forward to it through Porkbun URL forwarding.
 - The quote form posts JSON to Web3Forms (`https://api.web3forms.com/submit`) and shows an inline thank-you or error message. Without JavaScript it falls back to a normal form post. The hidden `botcheck` checkbox is a spam honeypot. Until a real key is added, the form shows a "please call or email us" message instead of sending.
 - Fonts: Fraunces (headings) and Figtree (body) from Google Fonts.
