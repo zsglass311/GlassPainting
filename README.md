@@ -281,6 +281,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 
 ## Technical notes (for whoever maintains the site)
 
+- When changing `styles.css` or `main.js`, bump the `?v=` number on their links in `index.html` so visitors' browsers load the new files instead of an old saved copy.
 - Plain HTML, CSS, and JavaScript with no build step: `index.html`, `assets/css/styles.css`, `assets/js/main.js`, and images in `assets/img/`. `.nojekyll` tells GitHub Pages to serve the files as they are.
 - **Contact details** (search the whole project when changing them):
   - Phone: `(770) 403-7608` (shown) and `+17704037608` / `+1-770-403-7608` (links and structured data)
