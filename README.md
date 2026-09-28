@@ -263,7 +263,7 @@ Claude wrote the text from what you shared. Let Claude know about anything that 
 
 - **Services:** the interior and exterior lists (for example, "Drywall patching" or "Porches, columns & railings"). Remove anything you don't do.
 - **Service area:** the list of towns is Claude's best guess at your area. Tell Claude the towns you actually serve.
-- **Your story and promises:** the "About Glass Painting" section and the six promises under "The Way We Work" (for example, "Work areas tidied at the end of every day"). Make sure they sound like you and match how you work.
+- **Your story and promises:** the "About Glass Painting" section and the four promises under "The Way We Work" (for example, "Clear Communication"). Make sure they sound like you and match how you work.
 - **Worth adding if true:** a warranty on your work, real customer reviews, and real photos of your work. Photos make the biggest difference of all.
 
 ---
