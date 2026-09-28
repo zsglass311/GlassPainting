@@ -382,14 +382,12 @@ use[href="#i-mark"] { stroke: none; }
 .standards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
   margin: 0;
-  padding: 0;
-  border: 1px solid var(--line);
-  background: var(--line);
+  padding: 0 1px 1px 0;
   list-style: none;
 }
-.standards li { padding: 36px 34px 34px; background: #fff; }
+/* Each box draws its own border (overlapping by 1px), so an empty grid spot shows nothing */
+.standards li { margin: 0 -1px -1px 0; padding: 36px 34px 34px; border: 1px solid var(--line); background: #fff; }
 .standards svg { width: 34px; height: 34px; margin-bottom: 18px; color: var(--clay); }
 .standards h3 { margin-bottom: 8px; font-size: 21px; font-stretch: 88%; text-transform: uppercase; }
 .standards p { margin: 0; font-size: 16px; color: var(--muted); }
