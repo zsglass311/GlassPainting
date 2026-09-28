@@ -381,7 +381,7 @@ use[href="#i-mark"] { stroke: none; }
 /* The way we work */
 .standards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   margin: 0;
   padding: 0;
