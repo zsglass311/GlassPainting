@@ -1,0 +1,161 @@
+#!/usr/bin/env bash
+# Drive a local copy of the Glass Painting static site for verification.
+set -euo pipefail
+
+HOST="${GLASSPAINTING_VERIFY_HOST:-127.0.0.1}"
+PORT="${GLASSPAINTING_VERIFY_PORT:-4173}"
+
+resolve_repo_root() {
+  local here
+  here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  cd "$here/../../../.."
+  pwd
+}
+
+REPO="$(resolve_repo_root)"
+SKILL="$REPO/.cursor/skills/verify-glasspainting"
+RUN="$SKILL/.run"
+ART="$SKILL/artifacts"
+BASE="http://${HOST}:${PORT}"
+
+need_repo() {
+  if [[ ! -f "$REPO/index.html" ]] || [[ ! -d "$REPO/areas" ]]; then
+    echo "control-glasspainting: expected Glass Painting repo at $REPO" >&2
+    exit 1
+  fi
+}
+
+cmd="${1:-}"
+shift || true
+
+need_repo
+mkdir -p "$RUN" "$ART"
+
+case "$cmd" in
+  launch)
+    if [[ -f "$RUN/pid" ]] && kill -0 "$(cat "$RUN/pid")" 2>/dev/null; then
+      echo "already running pid=$(cat "$RUN/pid") $BASE"
+      exit 0
+    fi
+    rm -f "$RUN/pid" "$RUN/log"
+    cd "$REPO"
+    python3 -m http.server "$PORT" --bind "$HOST" >"$RUN/log" 2>&1 &
+    echo $! >"$RUN/pid"
+    echo "$BASE" >"$RUN/base"
+    for _ in 1 2 3 4 5 6 7 8 9 10; do
+      if curl -fsS "$BASE/" >/dev/null 2>&1; then
+        echo "ready pid=$(cat "$RUN/pid") $BASE"
+        exit 0
+      fi
+      sleep 0.2
+    done
+    echo "control-glasspainting: server did not become ready. log:" >&2
+    cat "$RUN/log" >&2 || true
+    exit 1
+    ;;
+
+  doctor)
+    if [[ ! -f "$RUN/pid" ]]; then
+      echo "doctor FAIL: no pid file (launch first)" >&2
+      exit 1
+    fi
+    pid="$(cat "$RUN/pid")"
+    if ! kill -0 "$pid" 2>/dev/null; then
+      echo "doctor FAIL: pid $pid is not alive" >&2
+      exit 1
+    fi
+    cmd_line="$(ps -p "$pid" -o args= || true)"
+    case "$cmd_line" in
+      *http.server*) ;;
+      *)
+        echo "doctor FAIL: pid $pid is not http.server: $cmd_line" >&2
+        exit 1
+        ;;
+    esac
+    home="$(curl -fsS "$BASE/")"
+    echo "$home" | grep -q "Residential House Painting in Braselton, Georgia" \
+      || { echo "doctor FAIL: homepage missing expected H1" >&2; exit 1; }
+    echo "$home" | grep -q "Glass Painting" \
+      || { echo "doctor FAIL: homepage missing Glass Painting" >&2; exit 1; }
+    curl -fsS -o /dev/null "$BASE/assets/css/styles.css" \
+      || { echo "doctor FAIL: styles.css" >&2; exit 1; }
+    curl -fsS -o /dev/null "$BASE/assets/js/main.js" \
+      || { echo "doctor FAIL: main.js" >&2; exit 1; }
+    curl -fsS "$BASE/areas/" | grep -q "Areas We Serve Near Braselton" \
+      || { echo "doctor FAIL: /areas/" >&2; exit 1; }
+    curl -fsS "$BASE/areas/braselton-ga/" | grep -q "House Painters in Braselton, Georgia" \
+      || { echo "doctor FAIL: /areas/braselton-ga/" >&2; exit 1; }
+    echo "doctor OK pid=$pid $BASE"
+    ;;
+
+  get)
+    path="${1:-/}"
+    curl -fsS "${BASE}${path}"
+    ;;
+
+  assert-contains)
+    path="${1:-}"
+    needle="${2:-}"
+    if [[ -z "$path" || -z "$needle" ]]; then
+      echo "usage: control-glasspainting assert-contains <url-path> <literal>" >&2
+      exit 1
+    fi
+    body="$(curl -fsS "${BASE}${path}")"
+    if grep -F -q -- "$needle" <<<"$body"; then
+      echo "ok $path contains $(printf '%q' "$needle")"
+    else
+      echo "FAIL $path missing $(printf '%q' "$needle")" >&2
+      exit 1
+    fi
+    ;;
+
+  screenshot)
+    path="${1:-}"
+    rel="${2:-}"
+    if [[ -z "$path" || -z "$rel" ]]; then
+      echo "usage: control-glasspainting screenshot <url-path> <artifact-relpath>" >&2
+      exit 1
+    fi
+    out="$ART/$rel"
+    mkdir -p "$(dirname "$out")"
+    tmp="$(mktemp -d)"
+    chrome="$(command -v google-chrome || command -v chromium-browser || true)"
+    if [[ -z "$chrome" ]]; then
+      echo "control-glasspainting: google-chrome not found" >&2
+      exit 1
+    fi
+    "$chrome" --headless=new --disable-gpu --no-sandbox --hide-scrollbars \
+      --window-size=1280,800 --screenshot="$tmp/shot.png" "${BASE}${path}" \
+      >/dev/null 2>"$tmp/chrome.log"
+    mv "$tmp/shot.png" "$out"
+    rm -rf "$tmp"
+    echo "wrote $out"
+    ;;
+
+  stop)
+    if [[ -f "$RUN/pid" ]]; then
+      pid="$(cat "$RUN/pid")"
+      if kill -0 "$pid" 2>/dev/null; then
+        kill "$pid"
+        for _ in 1 2 3 4 5 6 7 8 9 10; do
+          kill -0 "$pid" 2>/dev/null || break
+          sleep 0.1
+        done
+        if kill -0 "$pid" 2>/dev/null; then
+          kill -9 "$pid" || true
+        fi
+        echo "stopped pid=$pid"
+      else
+        echo "pid $pid already gone"
+      fi
+    else
+      echo "nothing to stop"
+    fi
+    rm -rf "$RUN"
+    ;;
+
+  *)
+    echo "usage: control-glasspainting launch|doctor|get|assert-contains|screenshot|stop" >&2
+    exit 2
+    ;;
+esac
