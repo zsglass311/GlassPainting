@@ -427,6 +427,8 @@ use[href="#i-mark"] { stroke: none; }
   font-weight: 600;
   color: var(--ink);
 }
+.towns a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.towns a:hover { color: var(--clay); }
 .towns svg { width: 16px; height: 16px; flex: none; color: var(--clay); }
 
 /* FAQ */
