@@ -362,38 +362,39 @@
             <input type="hidden" name="from_name" value="Glass Painting website">
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" aria-hidden="true">
 
-            <h2>Get Your Free Estimate</h2>
-            <p class="form-lede">Tell us about your project and we'll be in touch to schedule a visit.</p>
+            <h2>Get a Free Estimate</h2>
+            <p class="form-lede">A few details is enough. We’ll call or email to set up a free visit at your home.</p>
             <div class="fields">
-              <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-              <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
-              <div class="full"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+              <div><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+              <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(770) 555-0100" required></div>
+              <div class="full"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
               <div class="full">
-                <label for="f-project">Project</label>
+                <label for="f-project">What do you need painted?</label>
                 <select id="f-project" name="project_type" required>
-                  <option value="">Choose one</option>
+                  <option value="" disabled selected>Select one</option>
                   <option>Interior painting</option>
                   <option>Exterior painting</option>
                   <option>Interior and exterior</option>
                   <option>Not sure yet</option>
                 </select>
               </div>
-              <div class="full"><label for="f-details">Details <span class="optional">(optional)</span></label><textarea id="f-details" name="message"></textarea></div>
+              <div class="full"><label for="f-city">City or neighborhood <span class="optional">(optional)</span></label><input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Hoschton, Hamilton Mill"></div>
+              <div class="full"><label for="f-details">Anything else we should know? <span class="optional">(optional)</span></label><textarea id="f-details" name="message" placeholder="Rooms, timing, or questions — whatever helps"></textarea></div>
             </div>
 
             <div class="form-error" id="form-error" role="alert" hidden>
-              <strong>Sorry, your request didn't go through.</strong>
-              Please try again, or call or text <a href="tel:+17704037608">(770) 403-7608</a> or email <a href="mailto:glasspaintingga@gmail.com">glasspaintingga@gmail.com</a>.
+              <strong>Sorry, that didn’t send.</strong>
+              Try again, or call or text <a href="tel:+17704037608">(770) 403-7608</a> or email <a href="mailto:glasspaintingga@gmail.com">glasspaintingga@gmail.com</a>.
             </div>
 
-            <button class="btn btn-clay" type="submit"><span class="btn-label">Request My Estimate</span></button>
+            <button class="btn btn-clay" type="submit"><span class="btn-label">Request Free Estimate</span></button>
             <p class="fine">After you send this, we’ll reach out within two business days to schedule a free, no-obligation visit at your home.</p>
           </form>
 
           <div class="form-success" id="form-success" tabindex="-1" hidden>
             <span class="success-icon"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
             <h2>Thank You!</h2>
-            <p>We got your request and will be in touch soon to schedule a visit. If you need us sooner, call or text <a href="tel:+17704037608">(770) 403-7608</a>.</p>
+            <p>We got your request. We’ll reach out within two business days to schedule a free visit. Need us sooner? Call or text <a href="tel:+17704037608">(770) 403-7608</a>.</p>
           </div>
         </div>
       </div>
