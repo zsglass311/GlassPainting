@@ -72,18 +72,24 @@ case "$cmd" in
         exit 1
         ;;
     esac
+    # Capture bodies and grep a here-string: under pipefail, `cmd | grep -q`
+    # fails at random when grep exits early and the writer gets SIGPIPE.
     home="$(curl -fsS "$BASE/")"
-    echo "$home" | grep -q "Residential House Painting in Braselton, Georgia" \
+    grep -qF "Residential House Painting in Braselton, Georgia" <<<"$home" \
       || { echo "doctor FAIL: homepage missing expected H1" >&2; exit 1; }
-    echo "$home" | grep -q "Glass Painting" \
+    grep -qF "Glass Painting" <<<"$home" \
       || { echo "doctor FAIL: homepage missing Glass Painting" >&2; exit 1; }
     curl -fsS -o /dev/null "$BASE/assets/css/styles.css" \
       || { echo "doctor FAIL: styles.css" >&2; exit 1; }
     curl -fsS -o /dev/null "$BASE/assets/js/main.js" \
       || { echo "doctor FAIL: main.js" >&2; exit 1; }
-    curl -fsS "$BASE/areas/" | grep -q "Areas We Serve Near Braselton" \
+    areas="$(curl -fsS "$BASE/areas/")" \
       || { echo "doctor FAIL: /areas/" >&2; exit 1; }
-    curl -fsS "$BASE/areas/braselton-ga/" | grep -q "House Painters in Braselton, Georgia" \
+    grep -qF "Areas We Serve Near Braselton" <<<"$areas" \
+      || { echo "doctor FAIL: /areas/" >&2; exit 1; }
+    town="$(curl -fsS "$BASE/areas/braselton-ga/")" \
+      || { echo "doctor FAIL: /areas/braselton-ga/" >&2; exit 1; }
+    grep -qF "House Painters in Braselton, Georgia" <<<"$town" \
       || { echo "doctor FAIL: /areas/braselton-ga/" >&2; exit 1; }
     echo "doctor OK pid=$pid $BASE"
     ;;

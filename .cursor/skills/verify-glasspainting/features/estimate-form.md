@@ -6,7 +6,7 @@ The estimate form lets a homeowner send name, phone, email, and project type so 
 
 - `form-present` shows required fields and the submit label `Request Free Estimate`.
 - `form-required` blocks an empty submit via native validity; `#form-success` stays hidden.
-- `form-fill` accepts name, phone, email, project type, optional city and details.
+- `form-fill` accepts name, phone, email, project type, optional city and details. Project types: `Interior painting`, `Exterior painting`, `Interior and exterior`, `Finishing touches`, `Pressure washing`, `Not sure yet`.
 - `form-send-stubbed` shows Thank You only when Web3Forms is intercepted.
 - `form-error-stubbed` shows `#form-error` when the stubbed request fails.
 
@@ -15,7 +15,7 @@ The estimate form lets a homeowner send name, phone, email, and project type so 
 - Land on `/` — the form is in the hero, id `estimate`.
 - Choose `Free Estimate` or `Request a Free Estimate`.
 - From an area page, choose `Free Estimate` (`/#estimate`) or `Request a Free Estimate`.
-- From a service card, choose `Get an interior quote` or `Get an exterior quote` (`#estimate`).
+- From a service card, choose `Get an interior quote`, `Get an exterior quote`, `Ask about finishing`, or `Get a wash quote` (`#estimate`).
 
 ## Driving it with control-glasspainting
 

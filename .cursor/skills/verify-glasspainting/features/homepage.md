@@ -6,7 +6,7 @@ The homepage tells a visitor they have reached Glass Painting, a family-owned re
 
 - `home-identity` shows the business name and the Braselton residential-painting heading.
 - `home-contact` exposes call and email links with the published numbers.
-- `home-nav` jumps to Services, About, Process, FAQ, and Service Area.
+- `home-nav` jumps to Services, About, Why Us, Process, Service Area, and FAQ.
 - `home-cta` reaches the estimate form from the Free Estimate control.
 
 ## How to get to it (user POV)
@@ -24,7 +24,7 @@ Preconditions:
 
 - **Load home.** Open `/`. Run `control-glasspainting assert-contains / "Residential House Painting in Braselton, Georgia"` and `control-glasspainting screenshot / homepage/hero.png`. The H1 and the name Glass Painting are visible.
 - **Contact.** Confirm `tel:+17704037608` and `mailto:glasspaintingga@gmail.com` on the page. Run `control-glasspainting assert-contains / "tel:+17704037608"` and `control-glasspainting assert-contains / "mailto:glasspaintingga@gmail.com"`.
-- **Jump to services.** Follow `#services`. Run `control-glasspainting assert-contains / "Interior &amp; Exterior House Painting"` (the services H2). A screenshot is optional; the section id is `#services`.
+- **Jump to services.** Follow `#services`. Run `control-glasspainting assert-contains / "House Painting, Finishing &amp; Pressure Washing"` (the services H2). Four cards: Interior Painting, Exterior Painting, Finishing Touches, Pressure Washing. A screenshot is optional; the section id is `#services`.
 - **Reach estimate.** Follow `#estimate` or the header link whose text is `Free Estimate`. Run `control-glasspainting assert-contains / "Get a Free Estimate"` and `control-glasspainting screenshot / homepage/estimate.png`. `#quote-form` is in the document.
 - **Proof.** Write `artifacts/homepage/proof.txt` naming this feature and `http://127.0.0.1:4173/`. The screenshots show Glass Painting and the estimate heading.
 
