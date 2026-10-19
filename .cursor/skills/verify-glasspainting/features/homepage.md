@@ -6,7 +6,7 @@ The homepage tells a visitor they have reached Glass Painting, a family-owned re
 
 - `home-identity` shows the business name and the Braselton residential-painting heading.
 - `home-contact` exposes call and email links with the published numbers.
-- `home-nav` jumps to Services, About, Why Us, Process, FAQ, and Service Area.
+- `home-nav` jumps to Services, About, Why Us, Process, Service Area, and FAQ.
 - `home-cta` reaches the estimate form from the Free Estimate control.
 
 ## How to get to it (user POV)
